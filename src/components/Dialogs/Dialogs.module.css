@@ -1,0 +1,16 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 4fr 10fr;
+    height: 100%;       
+}
+
+.messages {
+    margin: 10px;
+}
+
+
+
+.dialogsItems {
+    margin: 10px;
+    border-right: black solid;   
+}

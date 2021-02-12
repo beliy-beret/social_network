@@ -1,0 +1,10 @@
+.validator {
+    border: 1px solid red;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    color: brown;    
+}
+.formError {
+    color: coral;
+}

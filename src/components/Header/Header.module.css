@@ -1,0 +1,36 @@
+.container {
+    grid-area: h;
+    background-color: aqua;        
+}
+
+.logo img {
+    width: 50px;
+    float: left;    
+}
+
+.search {
+    float: right;
+    margin: 10px auto;
+
+}
+
+.authorization {        
+    float: right;
+    margin: 10px 50px;    
+}
+
+.login {
+    display: flex;
+    float: right;
+    margin: 10px 50px;
+}
+
+.headerItem {
+    position: relative;    
+}
+
+.ava {
+    margin: 0 5px 10px 5px;
+    position: relative;
+    top: -7px
+}

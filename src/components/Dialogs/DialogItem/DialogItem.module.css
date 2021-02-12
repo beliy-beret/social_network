@@ -1,0 +1,21 @@
+.dialog a {
+    text-decoration: none;
+}
+
+.dialog a.activeLink {
+    color: hotpink;
+    text-decoration: underline;
+}
+
+.dialog {
+    margin: 10px;
+    align-content: center;
+}
+.ava {
+    display: inline-block;
+}
+.link {    
+    position: relative;
+    top: -35px;
+    left: 50px;    
+}

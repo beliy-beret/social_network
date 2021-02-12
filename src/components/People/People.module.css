@@ -1,0 +1,41 @@
+.user {
+    display: grid;    
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: 
+    "p i"
+    "b i";
+    margin: 10px;    
+}
+
+.ava {
+    grid-area: p;
+    margin: 5px 10px;
+    background-color: rgb(145, 226, 195);
+}
+
+.ava img {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;    
+}
+
+.button {
+    grid-area: b;
+    margin: 0px 20px;
+}
+
+.info {
+    grid-area: i;
+    background-color: rgb(136, 183, 223);
+    border: 1px solid;
+    border-radius: 20px;
+}
+.des {
+    margin: 10px;
+}
+.activePage {
+    font-weight: bold;
+}
+.pageSelect span {
+    margin: 5px;
+}

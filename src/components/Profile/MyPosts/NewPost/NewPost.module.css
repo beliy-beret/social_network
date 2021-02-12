@@ -1,0 +1,11 @@
+.newPost textarea {
+    width: 95%;
+    height: 70px;
+    padding: 10px;    
+}
+
+.newPost button {
+    position: relative;
+    float: right;
+    left: -28px;
+}

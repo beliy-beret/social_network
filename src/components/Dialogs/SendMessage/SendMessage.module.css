@@ -1,0 +1,18 @@
+.message {
+    position: relative;
+}
+
+.newMessage textarea {
+    width: 90%;
+    height: 70px;
+    margin-top: 15px;
+}
+
+.sendMessage button {
+    position: relative;
+    float: right;
+    left: -43px;
+    margin-top: 10px;
+    padding: 5px;
+}
+

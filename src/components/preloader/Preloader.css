@@ -1,0 +1,11 @@
+.container {
+    position: absolute;
+}
+.preloader {
+    position: relative;
+    top: 250px;    
+    z-index: 100;
+}
+.preloader img {    
+    margin-left: 250px;    
+}
