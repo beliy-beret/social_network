@@ -12,6 +12,7 @@ export const getUsers = (currentPage, pageSize) => {
         .then(response => response.data)        
     )
 };
+
 export const subscriptionAPI = {
     subs (id) {
         return(
@@ -26,11 +27,13 @@ export const subscriptionAPI = {
         )
     },
 };
+
 export const aboutMe = () => {
     return(
         instance.get(`auth/me`)
     )
 };
+
 export const userProfileAPI = {
     profileInfo (id) {
         return(
@@ -45,19 +48,13 @@ export const userProfileAPI = {
         )
     },
     updateStatus (status) {
-        return(
-            instance.put(`profile/status`, { status })
-        )
+        return instance.put(`profile/status`, { status })
     },
-    authorization (email, password, rememberMe) {
-        return(
-            instance.post(`auth/login`, {email, password, rememberMe})            
-        )
-    },
+    authorization (email, password, rememberMe, captcha = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})            
+    },    
     logout () {
-        return (
-            instance.delete(`auth/login`)
-        )
+        return instance.delete(`auth/login`)        
     },
     replacePhoto (file) {
         const formData = new FormData();
@@ -68,3 +65,8 @@ export const userProfileAPI = {
     }
 };
 
+export const securityAPI = {
+    getCaptchaURL () {
+        return instance.get(`security/get-captcha-url`)
+    }
+}

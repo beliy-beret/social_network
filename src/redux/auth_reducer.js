@@ -1,9 +1,9 @@
 import { FORM_ERROR } from "final-form";
-import { aboutMe, userProfileAPI } from "../api/api";
+import { aboutMe, securityAPI, userProfileAPI } from "../api/api";
 import { toggleFetching } from "./people_reducer";
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const SET_ERROR = 'SET_ERROR';
+const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL';
 
 let initialState = {
     id: null,
@@ -14,8 +14,8 @@ let initialState = {
         large: null,
         small: null
     },
-    isFetching: false,
-    error: null,      
+    isFetching: false,    
+    captchaURL: null,      
 };
 
 const authReducer = (state = initialState, action) => {        
@@ -25,10 +25,10 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data                                            
             };            
-        case SET_ERROR:
+        case SET_CAPTCHA_URL:
             return {
                 ...state,
-                error: action.messages[0]
+                captchaURL: action.captchaURL
             }
                 
         default:
@@ -38,7 +38,7 @@ const authReducer = (state = initialState, action) => {
 
 // Actions_Creator
 export const setAuthUserData = (id, email, login, isAuth) => ({ type: SET_USER_DATA, data: {id, email, login, isAuth} });
-export const setError = (messages) => ({ type: SET_ERROR, messages })
+export const setCaptchaURL = (captchaURL) => ({ type: SET_CAPTCHA_URL, captchaURL })
 
 // Thunks_Creator
 export const getAuthUserData = () => (dispatch) => {
@@ -52,16 +52,26 @@ export const getAuthUserData = () => (dispatch) => {
         });    
 };
 
-export const log_in = (email, password, rememberMe) => async (dispatch) => {
+export const getCaptchaURL = () => async (dispatch) => {    
     dispatch(toggleFetching(true));
-    let response = await userProfileAPI.authorization(email, password, rememberMe)
+    const response = await securityAPI.getCaptchaURL();
+    const captchaURL = response.data.url;     
+    dispatch( setCaptchaURL(captchaURL) )     
+};
+
+export const log_in = (email, password, rememberMe, captcha) => async (dispatch) => {
+    dispatch(toggleFetching(true));
+    let response = await userProfileAPI.authorization(email, password, rememberMe, captcha)
         if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
+            dispatch(getAuthUserData());
         } else {
-            return {[FORM_ERROR]: response.data.messages[0] }           
-            //dispatch(setError(response.data.messages))
-        }        
-    dispatch(toggleFetching(false));
+            if (response.data.resultCode === 10) {
+                dispatch( getCaptchaURL());            
+                return {[FORM_ERROR]: response.data.messages[0] }
+            }            
+        }
+            dispatch(toggleFetching(false)); 
+            return { [FORM_ERROR]: response.data.messages[0] }
 }
 
 export const log_out = () => async (dispatch) => {

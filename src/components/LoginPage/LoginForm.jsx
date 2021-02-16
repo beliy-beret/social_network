@@ -1,14 +1,15 @@
 import React from 'react';
-import s from '../../validators/validators.module.css'
+import s from '../../validators/validators.module.css';
+import style from './loginForm.module.css';
 import { Form, Field } from 'react-final-form';
 import { composeValidators, minLength, required } from '../../validators/validators';
 
-const LoginForm = (props) => {            
+const LoginForm = (props) => {                 
     return(
-        <Form onSubmit={ values => props.log_in(values.login, values.password, values.rememberMe) }            
+        <Form onSubmit={ values => props.log_in(values.login, values.password, values.rememberMe, values.captcha) }            
             render={({ handleSubmit, submitError }) => (
                 <form onSubmit={ handleSubmit } >
-                    <div>
+                    <div className={style.login}>
                         <Field name="login" validate={ required }> 
                             {(props) => {
                                 return ( 
@@ -20,7 +21,7 @@ const LoginForm = (props) => {
                             }
                         </Field>
                     </div>
-                    <div>
+                    <div className={style.password}>
                         <Field name="password" validate={ composeValidators( required, minLength(8))} > 
                             {(props) => {
                                 return(
@@ -37,9 +38,15 @@ const LoginForm = (props) => {
                             {(props) => (<input type="checkbox" {...props.input} />)}
                         </Field>                        
                     </div>
-                    { submitError && <div> { submitError } </div>} 
+                    { submitError && <div className={style.formError}> { submitError } </div>}
+                    { props.captchaURL && <div className={style.captcha}>
+                            <img alt="captcha" src={props.captchaURL} />
+                            <Field name="captcha">
+                                {(props) => (<div><input type="text" {...props.input} /></div>)}
+                            </Field>
+                        </div>} 
                     <button> Login </button>
-                </form>
+                </form>                
             )}            
         />        
     );

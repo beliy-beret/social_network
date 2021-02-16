@@ -7,14 +7,14 @@ import LoginForm from './LoginForm';
 let mapStateToProps = (state) => ({
     id: state.auth.id,
     isAuth: state.auth.isAuth,
-    error: state.auth.error,
+    captchaURL: state.auth.captchaURL,
  });
 
 class LoginPage extends Component {    
     render() {        
         return (            
             <div>
-                {this.props.isAuth ? <Redirect to={"/profile/" + this.props.id} /> : <LoginForm log_in={this.props.log_in} error={this.props.error} />}
+                {this.props.isAuth ? <Redirect to={"/profile/" + this.props.id} /> : <LoginForm log_in={this.props.log_in} captchaURL={this.props.captchaURL} />}
             </div>
         );
     }

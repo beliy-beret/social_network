@@ -1,0 +1,12 @@
+.login {
+    margin: 10px 15px;
+}
+.password {
+    margin: 15px;
+}
+.captcha {    
+    margin: 10px 15px;
+}
+.formError{
+    margin: 10px 15px;
+}
