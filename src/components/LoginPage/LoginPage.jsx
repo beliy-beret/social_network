@@ -14,7 +14,7 @@ class LoginPage extends Component {
     render() {        
         return (            
             <div>
-                {this.props.isAuth ? <Redirect to={"/profile/" + this.props.id} /> : <LoginForm log_in={this.props.log_in} />}
+                {this.props.isAuth ? <Redirect to={"/profile/" + this.props.id} /> : <LoginForm log_in={this.props.log_in} error={this.props.error} />}
             </div>
         );
     }

@@ -1,3 +1,4 @@
+import { FORM_ERROR } from "final-form";
 import { aboutMe, userProfileAPI } from "../api/api";
 import { toggleFetching } from "./people_reducer";
 
@@ -56,8 +57,9 @@ export const log_in = (email, password, rememberMe) => async (dispatch) => {
     let response = await userProfileAPI.authorization(email, password, rememberMe)
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
-        } else {           
-            dispatch(setError(response.data.messages))
+        } else {
+            return {[FORM_ERROR]: response.data.messages[0] }           
+            //dispatch(setError(response.data.messages))
         }        
     dispatch(toggleFetching(false));
 }

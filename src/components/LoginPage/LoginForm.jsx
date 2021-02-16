@@ -37,7 +37,7 @@ const LoginForm = (props) => {
                             {(props) => (<input type="checkbox" {...props.input} />)}
                         </Field>                        
                     </div>
-                    { submitError && <div className={s.formError}> "ERROR" </div> }
+                    { submitError && <div> { submitError } </div>} 
                     <button> Login </button>
                 </form>
             )}            
